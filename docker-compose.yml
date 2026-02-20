@@ -1,0 +1,27 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: reporting-engine-api
+    ports:
+      - "4000:4000"
+    volumes:
+      - api_data:/app/backend/data
+    environment:
+      - PORT=4000
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:4000
+    container_name: reporting-engine-web
+    depends_on:
+      - api
+    ports:
+      - "5173:80"
+
+volumes:
+  api_data:
