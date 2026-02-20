@@ -1,19 +1,39 @@
-export type UiStateType = 'toggle' | 'form';
-
-export interface UiStateRecord {
+export interface UserRecord {
   id: number;
-  componentKey: string;
-  stateType: UiStateType;
-  stateValue: string;
-  updatedAt: string;
+  email: string;
+  passwordHash: string;
+  createdAt: string;
 }
 
-export type DbType = 'sqlite';
+export interface SessionRecord {
+  id: number;
+  userId: number;
+  token: string;
+  createdAt: string;
+}
+
+export interface PipelineRecord {
+  id: number;
+  userId: number;
+  name: string;
+  description: string;
+  createdAt: string;
+}
 
 export interface DbConnectionRecord {
   id: number;
+  userId: number;
   name: string;
-  dbType: DbType;
+  dbType: 'sqlite';
   connectionString: string;
   createdAt: string;
+}
+
+export interface UiStateRecord {
+  id: number;
+  userId: number;
+  componentKey: string;
+  stateType: 'toggle' | 'form' | 'navigation';
+  stateValue: string;
+  updatedAt: string;
 }
